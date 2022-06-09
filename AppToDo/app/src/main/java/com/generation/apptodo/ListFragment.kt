@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.generation.apptodo.adapter.TarefaAdapter
 import com.generation.apptodo.databinding.FragmentListBinding
 import com.generation.apptodo.model.Tarefa
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
@@ -55,7 +53,8 @@ private lateinit var binding: FragmentListBinding
                 "Paulo",
                 "2022-06-10",
                 false,
-                "Lazer"
+                "Lazer",
+                
             )
 
         )
