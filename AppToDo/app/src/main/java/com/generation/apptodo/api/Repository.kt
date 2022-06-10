@@ -5,7 +5,7 @@ import retrofit2.Response
 
 class Repository {
 
-    suspend fun  ListCatgoria(): Response<List<Categoria>>{
+    suspend fun  listcategoria(): Response<List<Categoria>>{
         return RetrofitInstance.api.listcategoria()
     }
 }
