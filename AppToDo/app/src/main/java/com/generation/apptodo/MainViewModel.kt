@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.generation.apptodo.api.Repository
 import com.generation.apptodo.model.Categoria
+import com.generation.apptodo.model.Tarefa
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.lang.Exception
@@ -33,6 +33,12 @@ class MainViewModel @Inject constructor (
         _myCategoriaResponse
 
 
+    private val _myTarefaResponse =
+        MutableLiveData<Response<List<Tarefa>>>()
+
+    val myTarefaResponse: LiveData<Response<List<Tarefa>>> =
+        _myTarefaResponse
+
     //Dado observavel e mutavel
     //LocalDate recupera a data atual
     val dataSelecionada = MutableLiveData<LocalDate>()
@@ -47,7 +53,7 @@ class MainViewModel @Inject constructor (
     //Está sobrevivendo ao ciclo de vida da MainViewModel por causa da corrotina listcategoria,
     //com a thread Dispatchers.IO
     fun listCategoria(){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             //try para evitar erro, ex: Se a não estiver conectado na internet
             try {
              val response = repository.listcategoria()
@@ -57,6 +63,27 @@ class MainViewModel @Inject constructor (
                Log.d("Erro", e.message.toString())
             }
 
+        }
+    }
+
+    fun addTarefa(tarefa: Tarefa){
+        viewModelScope.launch {
+            try {
+                repository.addTarefa(tarefa)
+            }catch (e: Exception){
+                Log.d("Erro", e.message.toString())
+            }
+        }
+    }
+
+    fun listTarefa(){
+        viewModelScope.launch {
+            try {
+                val response = repository.listTarefa()
+                _myTarefaResponse.value = response
+            }catch(e: Exception){
+                Log.d("Erro", e.message.toString())
+            }
         }
     }
 

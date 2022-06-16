@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.generation.apptodo.adapter.TarefaAdapter
@@ -20,6 +21,8 @@ class ListFragment : Fragment() {
    }*/
 
 private lateinit var binding: FragmentListBinding
+//Instanciar para pegar os dados da formfragment
+private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,8 @@ private lateinit var binding: FragmentListBinding
         // Inflate the layout for this fragment
         binding = FragmentListBinding.inflate(layoutInflater, container,false)
 
+
+        mainViewModel.listTarefa()
 
         //Configuração do RecyclerView para exibir o layout de forma linear
         //Irá receber uma lista externa vinda da api.
@@ -39,6 +44,12 @@ private lateinit var binding: FragmentListBinding
 
         binding.floatingAdd.setOnClickListener {
             findNavController().navigate(R.id.action_listFragment_to_formFragment)
+        }
+
+        mainViewModel.myTarefaResponse.observe(viewLifecycleOwner){
+            response -> if (response.body() != null){
+                adapter.setlist(response.body()!!)
+            }
         }
 
         return binding.root
