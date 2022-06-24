@@ -22,6 +22,7 @@ class MainViewModel @Inject constructor (
     private val repository: Repository
         ): ViewModel() {
 
+    var tarefaSelecionada: Tarefa? = null
 
 
     //Guardando os valores que é retornado do Repository
@@ -56,7 +57,7 @@ class MainViewModel @Inject constructor (
         viewModelScope.launch {
             //try para evitar erro, ex: Se a não estiver conectado na internet
             try {
-             val response = repository.listcategoria()
+             val response = repository.listCategoria()
                 _myCategoriaResponse.value = response
 
             }catch (e: Exception){
@@ -70,8 +71,9 @@ class MainViewModel @Inject constructor (
         viewModelScope.launch {
             try {
                 repository.addTarefa(tarefa)
+                listTarefa()
             }catch (e: Exception){
-                Log.d("Erro", e.message.toString())
+                Log.d("Erro Htto - Post", e.message.toString())
             }
         }
     }
@@ -85,6 +87,19 @@ class MainViewModel @Inject constructor (
                 Log.d("Erro", e.message.toString())
             }
         }
+    }
+
+    fun updateTarefa(tarefa: Tarefa) {
+        viewModelScope.launch {
+            try {
+                repository.updateTarefa(tarefa)
+                listTarefa()
+
+            } catch (e: Exception) {
+                Log.d("Erro Put", e.message.toString())
+            }
+        }
+
     }
 
 }

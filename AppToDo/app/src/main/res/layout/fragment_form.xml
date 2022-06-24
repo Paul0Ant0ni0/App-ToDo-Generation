@@ -17,6 +17,8 @@
         android:hint="Nome"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#171616"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +35,8 @@
         android:hint="Descricao"
         android:inputType="textMultiLine|textPersonName"
         android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#171616"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNome" />
@@ -48,6 +52,8 @@
         android:hint="Responsavel"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#171616"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editDescricao" />
@@ -64,6 +70,8 @@
         android:hint="Data"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="#000000"
+        android:textColorHint="#171616"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editResponsavel" />

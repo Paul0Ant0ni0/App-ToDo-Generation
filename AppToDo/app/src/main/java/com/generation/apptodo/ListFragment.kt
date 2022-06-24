@@ -9,9 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.generation.apptodo.adapter.TarefaAdapter
+import com.generation.apptodo.adapter.TeskClickListener
 import com.generation.apptodo.databinding.FragmentListBinding
+import com.generation.apptodo.model.Tarefa
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), TeskClickListener {
 
     /*Deve utilizar este código nas dependicias para ativar
 
@@ -37,9 +39,10 @@ private val mainViewModel: MainViewModel by activityViewModels()
         //Configuração do RecyclerView para exibir o layout de forma linear
         //Irá receber uma lista externa vinda da api.
 
-        val adapter = TarefaAdapter()
-        binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
+        val adapter = TarefaAdapter(this, mainViewModel)
+
         binding.recyclerTarefa.adapter = adapter
+        binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
         binding.recyclerTarefa.setHasFixedSize(true)
 
         binding.floatingAdd.setOnClickListener {
@@ -53,6 +56,11 @@ private val mainViewModel: MainViewModel by activityViewModels()
         }
 
         return binding.root
+    }
+
+    override fun onTaskClickListener(tarefa: Tarefa) {
+        mainViewModel.tarefaSelecionada = tarefa
+        findNavController().navigate(R.id.action_listFragment_to_formFragment)
     }
 }
 

@@ -6,13 +6,14 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface ApiService {
 
     @GET("categoria")
     //Trazer uma resposta e armzenar em uma lista
     //suspend porque ela sempre irá rodar dentro de uma corrontina
-    suspend fun listcategoria(): Response<List<Categoria>>
+    suspend fun listCategoria(): Response<List<Categoria>>
 
     @POST("tarefa")
     suspend fun addTarefa(
@@ -21,4 +22,9 @@ interface ApiService {
 
     @GET("tarefa")
     suspend fun listTarefa(): Response<List<Tarefa>>
+
+    @PUT("tarefa")
+    suspend fun updateTarefa(
+        @Body tarefa: Tarefa
+    ): Response<Tarefa>
 }

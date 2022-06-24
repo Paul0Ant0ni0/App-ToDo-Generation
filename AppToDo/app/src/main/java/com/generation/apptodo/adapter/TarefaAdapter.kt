@@ -3,10 +3,14 @@ package com.generation.apptodo.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.generation.apptodo.MainViewModel
 import com.generation.apptodo.databinding.CardLayoutBinding
 import com.generation.apptodo.model.Tarefa
 
-class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
+class TarefaAdapter (
+    val taskClickListener: TeskClickListener,
+    val mainViewModel: MainViewModel
+        ): RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
 
     private var listTarefa = emptyList<Tarefa>()
 
@@ -32,6 +36,10 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
         holder.binding.switchAndamento.isChecked = tarefa.status
         holder.binding.textCategoria.text = tarefa.categoria.descricao
 
+        holder.itemView.setOnClickListener{
+            taskClickListener.onTaskClickListener(tarefa)
+        }
+
     }
 
     //Retornado a quantidade de componentes que vai ser criado.
@@ -39,8 +47,8 @@ class TarefaAdapter : RecyclerView.Adapter<TarefaAdapter.TarefaViewHolder>(){
         return listTarefa.size
     }
 
-    fun setlist(List: List<Tarefa>){
-        listTarefa = List
+    fun setlist(list: List<Tarefa>){
+        listTarefa = list
         notifyDataSetChanged()
     }
 

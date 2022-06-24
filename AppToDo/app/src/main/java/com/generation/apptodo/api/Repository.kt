@@ -9,8 +9,8 @@ class Repository {
 
     //Suspend, pois, assim a função listacategoria poderá sobreviver ao ciclo de vida e ser suspensa
     //Ela é execuatada de forma assincrona, atuando diferente do modo cascata.
-    suspend fun  listcategoria(): Response<List<Categoria>>{
-        return RetrofitInstance.api.listcategoria()
+    suspend fun  listCategoria(): Response<List<Categoria>>{
+        return RetrofitInstance.api.listCategoria()
     }
 
     suspend fun addTarefa(tarefa: Tarefa): Response<Tarefa>{
@@ -19,5 +19,9 @@ class Repository {
 
     suspend fun listTarefa(): Response<List<Tarefa>>{
         return RetrofitInstance.api.listTarefa()
+    }
+
+    suspend fun updateTarefa(tarefa: Tarefa): Response<Tarefa>{
+        return RetrofitInstance.api.updateTarefa(tarefa)
     }
 }
