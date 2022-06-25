@@ -11,9 +11,9 @@ import com.generation.apptodo.model.Tarefa
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Exception
 import java.time.LocalDate
 import javax.inject.Inject
+import kotlin.Exception
 
 //Saber o que precisa injetar e sobreviver ao ciclo de vida.
 
@@ -100,6 +100,17 @@ class MainViewModel @Inject constructor (
             }
         }
 
+    }
+
+    fun deleteTarefa(id: Long){
+        viewModelScope.launch {
+            try {
+                    repository.deleteTarefa(id)
+                listTarefa()
+            }catch (e: Exception){
+                Log.d("Erro Delete", e.message.toString())
+            }
+        }
     }
 
 }

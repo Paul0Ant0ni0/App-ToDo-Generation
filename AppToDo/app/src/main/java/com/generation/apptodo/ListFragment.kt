@@ -39,7 +39,7 @@ private val mainViewModel: MainViewModel by activityViewModels()
         //Configuração do RecyclerView para exibir o layout de forma linear
         //Irá receber uma lista externa vinda da api.
 
-        val adapter = TarefaAdapter(this, mainViewModel)
+        val adapter = TarefaAdapter(this, mainViewModel, requireContext())
 
         binding.recyclerTarefa.adapter = adapter
         binding.recyclerTarefa.layoutManager = LinearLayoutManager(context)
